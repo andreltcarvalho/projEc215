@@ -13,14 +13,14 @@ while True:
 
     movimento = 0
 
-    cinza = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    captura_video_cinza = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     if fundo_estatico is None:
-        fundo_estatico = cinza
+        fundo_estatico = captura_video_cinza
         continue
 
     #A funcao absdiff pega a diferença absoluta entre pixels, e extrai os pixels dos objetos que estao se movendo
-    frame_diferenca = cv2.absdiff(fundo_estatico, cinza)
+    frame_diferenca = cv2.absdiff(fundo_estatico, captura_video_cinza)
 
 
     # 1[Imagem de origem], 2[Limite de valor de pixels], 3[Valor se o pixel for maior] e 4[Tipo de Threshold]
@@ -39,7 +39,7 @@ while True:
         (coordenada_x, coordenada_y, largura, altura) = cv2.boundingRect(contour)
         cv2.rectangle(frame, (coordenada_x, coordenada_y), (coordenada_x + largura, coordenada_y + altura), (0, 0, 0), 3)
 
-    cv2.imshow("Grayscale", cinza)
+    cv2.imshow("Tela preto e branco", captura_video_cinza)
 
     cv2.imshow("Frame de diferenca", frame_diferenca)
 
